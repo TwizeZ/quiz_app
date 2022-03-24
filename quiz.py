@@ -25,20 +25,23 @@ class Question:
 # WHILE-sats här? while round <= round_quantity
         print("===== QUESTION =====")
         print(self.question)
+        print()
         print("===== ALTERNATIVES =====")
         for alt in self.choices:
             print(alt)
+        print()
         answer = input("Your answer: ")
         if answer == self.answer:
-            print("You got mad bunda today!")
+            print("Congratulations! Senna would have been proud...")
             print()
             print()
             print()
         else:
-            print("Ain't pushing P I see...")
+            print(f"That was a tough one, huh? The right answer was {self.answer}.")
             print()
             print()
             print()
+
 
 
 def load_question():
@@ -55,12 +58,17 @@ def load_question():
 
 # ---------------------------------------------------------------------------------------------------------
 
-def main():
+def main(rq):
+    round = 1
+    
     question = load_question()
     random.shuffle(question)
+    for round in range(rq):
+        question[round].play_question() #kan inte köra fler rundor än frågor
 
-    for q in question:
-        q.play_question()
+
+    # for q in question:
+    #     q.play_question()
 
 
 
@@ -83,10 +91,9 @@ if __name__ == "__main__":
     
     if "" in start:
         pass
-    
-# create number of rounds it will repeat main
+
 #    for i in range(round_quantity):
-    main()
+    main(round_quantity)
     
     print("===== END =====")
     print("Thanks for playing!")
