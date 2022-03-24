@@ -8,3 +8,5 @@ What is Seat's country of origin?/Spain/Italy,Spain,Argentina/
 Which brand was first founded back in 1909?/Bugatti/Bugatti,Lamborghini,Ferrari/
 What is Adam's favorite car brand of all time?/Volvo/Volvo,Porsche,Volkswagen/
 What year did Audi first fit their competetive rally cars with the Quattro drivetrain?/1980/1975,1980,1995/
+A common term used to judge certain types of vehices is "RICE", but what does the fourth letter stand for?/Enhancement/ECU,Enforced,Enhancement/
+What electric vehicle company did Amazon recently invest in, in return for the manufacturer to supply Amazon with electric delivery vans?/Rivian/Rivian,Tesla,Scania/

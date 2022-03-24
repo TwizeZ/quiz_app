@@ -41,8 +41,6 @@ class Question:
             print()
             print()
 
-
-
 def load_question():
     questions = []
     with open("questions.txt", "r", encoding="utf8") as f:
@@ -55,18 +53,24 @@ def load_question():
             questions.append(quiz)
     return questions
 
+def question_quantity():
+    with open("questions.txt", "r", encoding="utf8") as fp:
+        qtot = len(fp.readlines())
+    return qtot
+
 # ---------------------------------------------------------------------------------------------------------
 
 def main():
-    round = 1
+    round = 1    
 
 # number of rounds you would like to play in a loop
 
     while True:
-        rq = int(input("How many rounds would you like to play? Max number of rounds is 10.\n"))
+        qq = question_quantity()
+        rq = int(input(f"How many rounds would you like to play? Max number of rounds is {qq}.\n"))
 
-        if rq > 10 or rq < 1:
-            print("Not a valid answer! Please choose between 1-10 rounds:")
+        if rq > qq or rq < 1:
+            print(f"Not a valid answer! Please choose between 1-{qq} rounds:")
             continue
         else:
             break
@@ -83,7 +87,7 @@ def main():
     question = load_question()
     random.shuffle(question)
     for round in range(rq):
-        question[round].play_question() #kan inte köra fler rundor än frågor
+        question[round].play_question() # BUG: kan inte köra fler rundor än frågor (BÖR vara löst)
 
     # for q in question:
     #     q.play_question()
