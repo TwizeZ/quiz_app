@@ -22,7 +22,6 @@ class Question:
         return self.choices
     
     def play_question(self):
-# WHILE-sats här? while round <= round_quantity
         print("===== QUESTION =====")
         print(self.question)
         print()
@@ -32,7 +31,7 @@ class Question:
         print()
         answer = input("Your answer: ")
         if answer == self.answer:
-            print("Congratulations! Senna would have been proud...")
+            print("Well done! Keep this up.")
             print()
             print()
             print()
@@ -58,46 +57,44 @@ def load_question():
 
 # ---------------------------------------------------------------------------------------------------------
 
-def main(rq):
+def main():
     round = 1
-    
-    question = load_question()
-    random.shuffle(question)
-    for round in range(rq):
-        question[round].play_question() #kan inte köra fler rundor än frågor
-
-
-    # for q in question:
-    #     q.play_question()
-
-
-
-if __name__ == "__main__":
-    print("Welcome!")
 
 # number of rounds you would like to play in a loop
 
     while True:
-        round_quantity = int(input("How many rounds would you like to play? Max number of rounds is 10.\n"))
+        rq = int(input("How many rounds would you like to play? Max number of rounds is 10.\n"))
 
-        if round_quantity > 10 or round_quantity < 1:
+        if rq > 10 or rq < 1:
             print("Not a valid answer! Please choose between 1-10 rounds:")
+            continue
         else:
             break
 
-    start = input(f"{round_quantity} number of rounds selected.\nPress Enter to continue: ")
+    start = input(f"{rq} number of rounds selected.\nPress Enter to continue: ")
     print()
     print()
     
     if "" in start:
         pass
 
-# main sectino
+# question generator
 
-    main(round_quantity)
+    question = load_question()
+    random.shuffle(question)
+    for round in range(rq):
+        question[round].play_question() #kan inte köra fler rundor än frågor
+
+    # for q in question:
+    #     q.play_question()
+
+# ---------------------------------------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    print("Welcome!")
+    main()
     
 # end quote
-
     print("===== END =====")
     print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
     print("Thanks for playing!")
