@@ -75,7 +75,7 @@ def main(rq):
 if __name__ == "__main__":
     print("Welcome!")
 
-# number of rounds you would like to play
+# number of rounds you would like to play in a loop
 
     while True:
         round_quantity = int(input("How many rounds would you like to play? Max number of rounds is 10.\n"))
@@ -85,15 +85,19 @@ if __name__ == "__main__":
         else:
             break
 
-    start = input(f"{round_quantity} number of rounds selected. Press Enter to continue: ")
+    start = input(f"{round_quantity} number of rounds selected.\nPress Enter to continue: ")
     print()
     print()
     
     if "" in start:
         pass
 
-#    for i in range(round_quantity):
+# main sectino
+
     main(round_quantity)
     
+# end quote
+
     print("===== END =====")
+    print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
     print("Thanks for playing!")
