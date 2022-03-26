@@ -11,7 +11,8 @@ class Question:
         self.answer = answer
         self.choices = choices
         random.shuffle(self.choices)
-    
+        self.counter = 0
+
     def get_name(self):
         return self.question
 
@@ -30,7 +31,8 @@ class Question:
             print(alt)
         print()
         answer = input("Your answer: ")
-        if answer == self.answer:
+        if answer.casefold() == self.answer.casefold():
+            self.counter += 1
             print("Well done! Keep this up.")
             print()
             print()
@@ -40,6 +42,9 @@ class Question:
             print()
             print()
             print()
+    
+    def score(self):
+        return self.counter
 
 def load_question():
     questions = []
@@ -78,7 +83,6 @@ def main():
     start = input(f"{rq} number of rounds selected.\nPress Enter to continue: ")
     print()
     print()
-    
     if "" in start:
         pass
 
@@ -87,7 +91,7 @@ def main():
     question = load_question()
     random.shuffle(question)
     for round in range(rq):
-        question[round].play_question() # BUG: kan inte köra fler rundor än frågor (BÖR vara löst)
+        question[round].play_question()
 
     # for q in question:
     #     q.play_question()
@@ -100,5 +104,10 @@ if __name__ == "__main__":
     
 # end quote
     print("===== END =====")
-    print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
+
+    qq = question_quantity()
+    score = Question.score
+    print(f"Your final score is {score} out of {qq}.") # BUG: Score får fel output. Fråga Niclas på tisdag.
     print("Thanks for playing!")
+    print()
+    print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
