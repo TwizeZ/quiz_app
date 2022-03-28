@@ -61,7 +61,7 @@ def load_question():
 def question_quantity():
     with open("questions.txt", "r", encoding="utf8") as fp:
         qtot = len(fp.readlines())
-    return qtot
+    return qtot    
 
 # ---------------------------------------------------------------------------------------------------------
 
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     qq = question_quantity()
     score = Question.score
-    print(f"Your final score is {score} out of {qq}.") # BUG: Score får fel output. Fråga Niclas på tisdag.
+    print(f"Your final score is {score} out of {qq}.") # BUG: Score får fel output. Fråga Niclas på tisdag. + BUG: Byt ut qq till rq.
     print("Thanks for playing!")
     print()
     print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
