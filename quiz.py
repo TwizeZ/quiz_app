@@ -22,7 +22,6 @@ class Question:
         return self.choices
     
     def play_question(self):
-        self.score = 0
         print("===== QUESTION =====")
         print(self.question)
         print()
@@ -32,24 +31,27 @@ class Question:
         print()
         answer = input("Your answer: ")
         if answer.casefold() == self.answer.casefold():
-            self.score += 1
             print(f"Well done! {self.answer} is correct.")
             print()
             print()
-            print()
+            return 1
         else:
             print(f"That was a tough one, huh? The right answer was {self.answer}.")
             print()
             print()
-            print()
-        return self.score
+            return 0
     
     # def score(self):
     #     return self.counter
 
 class Quiz:
-    def play_quiz():
-        round = 1    
+    def __init__(self, questions):
+        self.score = 0
+        self.questions = questions
+    
+    def play_quiz(self):
+        print()
+        print("===== WELCOME =====")
 
         while True:
             qq = question_quantity()
@@ -70,6 +72,16 @@ class Quiz:
         random.shuffle(question)
         for round in range(rq):
             question[round].play_question()
+
+        for q in self.questions: # BUG: får det inte att fungera. Trodde man skulle använda range(rq). Fråga Nille.
+            self.score += q.play_question()
+
+        print("===== END =====")
+
+        # qq = question_quantity()
+        print(f"Your final score is {self.score} out of {rq}.")
+        print("Thanks for playing!")
+        print()
 
 # ---------------------------------------------------------------------------------------------------------
 
@@ -93,20 +105,12 @@ def question_quantity():
 # ---------------------------------------------------------------------------------------------------------
 
 def main():
-    Quiz.play_quiz()
+    Quiz().play_quiz()
 
 # ---------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    print()
-    print("===== WELCOME =====")
-    
+
     main()
     
-    print("===== END =====")
-
-    # qq = question_quantity()
-    print(f"Your final score is [PLACEHOLDER] out of [PLACEHOLDER].") # BUG: Score får fel output. Fråga Niclas på tisdag.
-    print("Thanks for playing!")
-    print()
-    print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
+    # print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
