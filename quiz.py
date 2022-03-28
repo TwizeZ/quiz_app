@@ -11,7 +11,6 @@ class Question:
         self.answer = answer
         self.choices = choices
         random.shuffle(self.choices)
-        self.counter = 0
 
     def get_name(self):
         return self.question
@@ -23,6 +22,7 @@ class Question:
         return self.choices
     
     def play_question(self):
+        self.score = 0
         print("===== QUESTION =====")
         print(self.question)
         print()
@@ -32,8 +32,8 @@ class Question:
         print()
         answer = input("Your answer: ")
         if answer.casefold() == self.answer.casefold():
-            self.counter += 1
-            print("Well done! Keep this up.")
+            self.score += 1
+            print(f"Well done! {self.answer} is correct.")
             print()
             print()
             print()
@@ -42,9 +42,36 @@ class Question:
             print()
             print()
             print()
+        return self.score
     
-    def score(self):
-        return self.counter
+    # def score(self):
+    #     return self.counter
+
+class Quiz:
+    def play_quiz():
+        round = 1    
+
+        while True:
+            qq = question_quantity()
+            rq = int(input(f"How many rounds would you like to play? Max number of rounds is {qq}.\n"))
+            if rq > qq or rq < 1:
+                print(f"Not a valid answer! Please choose between 1-{qq} rounds:")
+                continue
+            else:
+                break
+
+        start = input(f"{rq} number of rounds selected.\nPress Enter to continue: ")
+        print()
+        print()
+        if "" in start:
+            pass
+
+        question = load_question()
+        random.shuffle(question)
+        for round in range(rq):
+            question[round].play_question()
+
+# ---------------------------------------------------------------------------------------------------------
 
 def load_question():
     questions = []
@@ -66,48 +93,21 @@ def question_quantity():
 # ---------------------------------------------------------------------------------------------------------
 
 def main():
-    round = 1    
-
-# number of rounds you would like to play in a loop
-
-    while True:
-        qq = question_quantity()
-        rq = int(input(f"How many rounds would you like to play? Max number of rounds is {qq}.\n"))
-
-        if rq > qq or rq < 1:
-            print(f"Not a valid answer! Please choose between 1-{qq} rounds:")
-            continue
-        else:
-            break
-
-    start = input(f"{rq} number of rounds selected.\nPress Enter to continue: ")
-    print()
-    print()
-    if "" in start:
-        pass
-
-# question generator
-
-    question = load_question()
-    random.shuffle(question)
-    for round in range(rq):
-        question[round].play_question()
-
-    # for q in question:
-    #     q.play_question()
+    Quiz.play_quiz()
 
 # ---------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    print("Welcome!")
+    print()
+    print("===== WELCOME =====")
+    
     main()
     
-# end quote
     print("===== END =====")
 
     qq = question_quantity()
-    score = Question.score
-    print(f"Your final score is {score} out of {qq}.") # BUG: Score får fel output. Fråga Niclas på tisdag.
+    # score = Quiz
+    print(f"Your final score is NNN out of {qq}.") # BUG: Score får fel output. Fråga Niclas på tisdag.
     print("Thanks for playing!")
     print()
     print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
