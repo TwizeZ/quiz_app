@@ -4,6 +4,7 @@
 #16-03-2022
 
 import random
+from time import sleep
 
 class Question:
     def __init__(self, question : str, answer : str, choices : list()):
@@ -40,15 +41,10 @@ class Question:
             print()
             print()
             return 0
-    
-    # def score(self):
-    #     return self.counter
 
 class Quiz:
     def __init__(self):
         self.score = 0
-        #self.questions = questions # ska denna hämta data från en lista med antalet frågor, och som då också slumpar fram frågorna (istället för hur det ser ut just nu)?
-        #random.shuffle(self.questions)
 
     def play_quiz(self):
         print()
@@ -74,12 +70,8 @@ class Quiz:
         for round in range(rq):
             self.score += self.questions[round].play_question()
 
-        #for q in self.questions: # BUG: får det inte att fungera. Fråga Nille.
-        #    self.score += q.play_question()
-
         print("===== END =====")
 
-        # qq = question_quantity()s
         print(f"Your final score is {self.score} out of {rq}.")
         print("Thanks for playing!")
         print()
@@ -113,5 +105,19 @@ def main():
 if __name__ == "__main__":
 
     main()
-    
+
+    while True:
+        replay = input("Would you like to play again?\n")
+        if replay.casefold() == "yes".casefold():
+            print("Very well! Restarting quiz...")
+            sleep(3)
+            print()
+            print()
+            print()
+            main()
+        else:
+            print("That's fine. Have a good day!")
+            print()
+            break
+
     # print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
