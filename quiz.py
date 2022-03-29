@@ -12,15 +12,6 @@ class Question:
         self.answer = answer
         self.choices = choices
         random.shuffle(self.choices)
-
-    def get_name(self):
-        return self.question
-
-    def get_answer(self):
-        return self.answer
-
-    def get_choices(self):
-        return self.choices
     
     def play_question(self):
         print("===== QUESTION =====")
@@ -51,7 +42,15 @@ class Quiz:
         print("===== WELCOME =====")
 
         while True:
-            qq = question_quantity()
+            choice = int(input(f"What topic do you want the quiz to be about? You can choose between:\n1. Cars\n2. NTI\n3. Music\n"))
+            if choice > 3 or choice < 1:
+                print("Not a valid answer! Please choose between the options displayed.")
+                continue
+            else:
+                break
+
+        while True:
+            qq = question_quantity(int(choice))
             rq = int(input(f"How many rounds would you like to play? Max number of rounds is {qq}.\n"))
             if rq > qq or rq < 1:
                 print(f"Not a valid answer! Please choose between 1-{qq} rounds:")
@@ -65,7 +64,7 @@ class Quiz:
         if "" in start:
             pass
 
-        self.questions = load_question()
+        self.questions = load_question(int(choice))
         random.shuffle(self.questions)
         for round in range(rq):
             self.score += self.questions[round].play_question()
@@ -78,9 +77,17 @@ class Quiz:
 
 # ---------------------------------------------------------------------------------------------------------
 
-def load_question():
+def load_question(choice : int):
+    path = ""
+    if choice == 1:
+        path='cars.txt'
+    elif choice == 2:
+        path='nti.txt'
+    elif choice == 3:
+        path='music.txt' 
+    
     questions = []
-    with open("questions.txt", "r", encoding="utf8") as f:
+    with open(path, "r", encoding="utf8") as f:
         for line in f.readlines():
             selection = line.split("/")
             quiz = Question(selection[0],
@@ -90,8 +97,16 @@ def load_question():
             questions.append(quiz)
     return questions
 
-def question_quantity():
-    with open("questions.txt", "r", encoding="utf8") as fp:
+def question_quantity(choice : int):
+    path = ""
+    if choice == 1:
+        path='cars.txt'
+    elif choice == 2:
+        path='nti.txt'
+    elif choice == 3:
+        path='music.txt' 
+    
+    with open(path, "r", encoding="utf8") as fp:
         qtot = len(fp.readlines())
     return qtot    
 
@@ -108,9 +123,9 @@ if __name__ == "__main__":
 
     while True:
         replay = input("Would you like to play again?\n")
-        if replay.casefold() == "yes".casefold():
+        if replay.casefold() == "yes".casefold() or replay.casefold() == "yezzzelitoo".casefold(): # Adams lilla easter egg
             print("Very well! Restarting quiz...")
-            sleep(3)
+            sleep(2)
             print()
             print()
             print()
@@ -119,5 +134,3 @@ if __name__ == "__main__":
             print("That's fine. Have a good day!")
             print()
             break
-
-    # print("As Ayrton Senna once said: 'If you no longer go for a gap that exits, you are no longer a racing driver.'")
