@@ -45,10 +45,11 @@ class Question:
     #     return self.counter
 
 class Quiz:
-    def __init__(self, questions):
+    def __init__(self):
         self.score = 0
-        self.questions = questions
-    
+        #self.questions = questions # ska denna hämta data från en lista med antalet frågor, och som då också slumpar fram frågorna (istället för hur det ser ut just nu)?
+        #random.shuffle(self.questions)
+
     def play_quiz(self):
         print()
         print("===== WELCOME =====")
@@ -68,17 +69,17 @@ class Quiz:
         if "" in start:
             pass
 
-        question = load_question()
-        random.shuffle(question)
+        self.questions = load_question()
+        random.shuffle(self.questions)
         for round in range(rq):
-            question[round].play_question()
+            self.score += self.questions[round].play_question()
 
-        for q in self.questions: # BUG: får det inte att fungera. Trodde man skulle använda range(rq). Fråga Nille.
-            self.score += q.play_question()
+        #for q in self.questions: # BUG: får det inte att fungera. Fråga Nille.
+        #    self.score += q.play_question()
 
         print("===== END =====")
 
-        # qq = question_quantity()
+        # qq = question_quantity()s
         print(f"Your final score is {self.score} out of {rq}.")
         print("Thanks for playing!")
         print()
